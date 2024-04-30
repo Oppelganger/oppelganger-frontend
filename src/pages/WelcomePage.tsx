@@ -1,70 +1,47 @@
-import { Box, Container, Divider, Typography } from '@mui/material';
-import UploadNewProfile from '../components/UploadNewProfile';
-import CreateNewProfile from '../components/CreateNewProfile';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CheckCompatibilityCircle from '../components/CheckCompatibilityCircle';
+import { ReactComponent as Loader } from '../assets/loader.svg'
+import Button from '../components/Button';
+import { useRef } from 'react';
+import { ReactComponent as Cloud } from '../assets/cloud.svg'
 
 const WelcomePage = () => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
   return (
-    <Container maxWidth='md'>
-      <Box
-        sx={{ height: '100vh' }}
-        display='flex'
-        flexDirection='column'
-        justifyContent='space-between'
-      >
-        <Box
-          sx={{ paddingTop: '70px' }}
-        >
+    <div className='px-[240rem] mx-[auto]'>
+      <div className='flex flex-col justify-between h-[100vh]'>
+        <div className='pt-[70rem]'>
           <Header />
-        </Box>
+        </div>
 
-        <Box
-          display='flex'
-          justifyContent='center'
-          alignItems='center'
-          flexDirection='column'
-          gap={1}
+        <div className='flex justify-center items-center flex-col gap-[12rem]'>
+          <span className="w-[40rem] h-[40rem] block animate-spin" role="progressbar">
+            <Loader />
+          </span>
+          
+          <p>Проверка совместимости компьютера и ПО...</p>
+        </div>
 
-        >
-          <CheckCompatibilityCircle />
+        <div className='flex flex-col gap-[32rem] items-center pb-[50rem]'>
+          <hr className='h-[2rem] border-[#00000020] w-full' />
 
-          <Typography>
-            Проверка совместимости компьютера и ПО...
-          </Typography>
-        </Box>
-
-        <Box
-          display='flex'
-          flexDirection='column'
-          gap={4}
-          justifyContent='start'
-          sx={{ paddingBottom: '50px', }}
-          alignContent='center'
-          justifyItems='center'
-        >
-                    <Divider flexItem />
-
-          <Box
-            display='flex'
-            alignItems="center"
-            justifyContent='center'
-            gap={4}
-            height='100%'
-            sx={{ paddingX: '200px' }}
-          >
-            <CreateNewProfile />
-
-            <UploadNewProfile />
-          </Box>
-
+          <div className='flex items-center justify-center gap-[32rem] h-full px-[200rem]'>
+            <Button color='--primary' text='Создать новый профиль' />
+            
+            <Button color='--secondary' text='Загрузить'
+              width='w-fit'
+              clickHandler={() => inputRef.current?.click()}
+            >
+              <Cloud className='mr-[8rem] ml-[-4rem]' />
+              <input ref={inputRef} className='custom-input' type='file' />
+            </Button>
+          </div>
 
           <Footer />
-        </Box>
-
-      </Box>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }
 

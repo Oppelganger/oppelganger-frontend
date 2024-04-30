@@ -1,11 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --scale: 0.07vw;
+
+  --primary: #1976D2;
+  --primary_hover: #1565C0;
+  --secondary: #0288D1
+}
+
+html {
+  font-size: var(--scale);
+} 
+
+@media only screen and (max-width: 639px) {
+  :root {
+    --scale: 0.33vw;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: #EFEFEF;
+  font-size: 16rem;
 }
 
 * {
   box-sizing: border-box;
+  font-family: 'Onest';
+}
+
+.custom-shadow {
+  box-shadow: 0rem 3rem 1rem -2rem rgba(0,0,0,0.2), 0rem 2rem 2rem 0rem rgba(0,0,0,0.14), 0rem 1rem 5rem 0rem rgba(0,0,0,0.12);
+}
+
+.custom-shadow:hover {
+  box-shadow: 0rem 2rem 4rem -1rem rgba(0,0,0,0.2), 0rem 4rem 5rem 0rem rgba(0,0,0,0.14), 0rem 1rem 10rem 0rem rgba(0,0,0,0.12);
+}
+
+.custom-shadow:active {
+  box-shadow: 0rem 5rem 5rem -3rem rgba(0,0,0,0.2), 0rem 8rem 10rem 1rem rgba(0,0,0,0.14), 0rem 3rem 14rem 2rem rgba(0,0,0,0.12);
+}
+
+.custom-input {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  white-space: nowrap;
+  width: 0;
 }
 
 @font-face {
