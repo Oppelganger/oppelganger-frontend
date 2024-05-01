@@ -1,7 +1,6 @@
 const HOST = 'http://127.0.0.1:8080'
 
 export const fetcher = async (url: string) => {
-    alert('assss')
     const res = await fetch(HOST + url)
 
     if (!res.ok) {

@@ -6,12 +6,20 @@ export default function useCompatibility() {
         shouldRetryOnError: true
     })
 
-    const compatible = data?.supported
-    const message = data?.message || error.data
+    try {
+        const compatible = data?.supported
+        const message = data?.message || error.data
 
-    return {
-        compatible,
-        message,
-        isLoading,
+        return {
+            compatible,
+            message,
+            isLoading : true,
+        }
+    } catch (error) {
+        return {
+            compatible: false,
+            message: "",
+            isLoading: false
+        }
     }
 }
