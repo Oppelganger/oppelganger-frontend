@@ -1,16 +1,14 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Button from '../components/Button';
-import { useRef } from 'react';
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Button from '../components/Button'
+import { useRef } from 'react'
 import { ReactComponent as Cloud } from '../assets/cloud.svg'
-import CompatibilityCheck from '../components/CompatibilityCheck';
-import { checkMobile } from '../utils/checkMobile';
+import CompatibilityCheck from '../components/CompatibilityCheck'
 
-import useCompatibility from '../hooks/useCompatibility';
+import useCompatibility from '../hooks/useCompatibility'
 
 const WelcomePage = () => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const isMobile = checkMobile()
   const { compatible, message, isLoading } = useCompatibility()
 
   return (
@@ -22,7 +20,6 @@ const WelcomePage = () => {
 
         <div className='flex justify-center items-center flex-col gap-[12rem]'>
           <CompatibilityCheck
-            isMobile={isMobile}
             isLoading={isLoading}
             compatible={compatible}
             message={message} />
@@ -35,13 +32,13 @@ const WelcomePage = () => {
             <Button
               background='bg-[--primary]'
               text='Создать новый профиль'
-              disabled={!compatible || isMobile || isLoading}
+              disabled={!compatible || isLoading}
             />
 
             <Button
               background='bg-[--secondary]'
               text='Загрузить'
-              disabled={!compatible || isMobile || isLoading}
+              disabled={!compatible || isLoading}
               width='w-fit'
               clickHandler={() => inputRef.current?.click()}
             >
