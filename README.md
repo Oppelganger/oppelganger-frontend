@@ -1,3 +1,8 @@
+Building:
+```shell
+$ docker buildx build . --tag personality-frontend:latest
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
