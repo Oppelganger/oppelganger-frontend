@@ -7,10 +7,11 @@ import { getRequestStatus, requestStatusResponse } from './api/getRequestStatus'
 import { useEffect, useState } from 'react'
 
 const VideoGenerationPage = () => {
-    const { sex, description, id, prompt, setPrompt } = useVideoGenerationStore()
+    const { sex, description, id } = useVideoGenerationStore()
     const [message, setMessage] = useState('Отправка запроса...')
     const [video, setVideo] = useState<string | undefined>('')
     const [requesting, setRequesting] = useState(false)
+    const [prompt, setPrompt] = useState('')
 
     const audioFile = 'audio.ogg'
     const videoFile = 'video.mp4'
@@ -44,7 +45,7 @@ const VideoGenerationPage = () => {
             handleVideoGeneration();
             console.log('YES')
 
-           interval = setInterval(fetchRequestStatus, 500);
+            interval = setInterval(fetchRequestStatus, 500);
         }
 
         if (!requesting) {
@@ -74,7 +75,7 @@ const VideoGenerationPage = () => {
                 <div className='w-full flex flex-col gap-[2rem]'>
                     <p className='font-onest text-[24rem]'>Задайте запрос</p>
 
-                    <form className='grid grid-cols-[calc(80%-8rem)_calc(20%-8rem)] gap-[16rem]'>
+                    <div className='grid grid-cols-[calc(80%-8rem)_calc(20%-8rem)] gap-[16rem]'>
                         <InputField
                             placeholder='Как собрать грибную поляну?'
                             value={prompt}
@@ -88,7 +89,7 @@ const VideoGenerationPage = () => {
                             text='Отправить'
                             background='bg-[--primary]'
                         />
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
