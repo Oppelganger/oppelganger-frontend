@@ -6,7 +6,7 @@ export type GenerateVideoRequestType = {
     "input": {
         "personality": {
             "id": string,
-            "prompt": string[] | string,
+            "prompt": string[],
             "video_objects": [string],
             "audio_objects": [string],
             "language": "ru",
@@ -44,7 +44,7 @@ export const postGenerateVideo = (props: CreateNewProfileProps & VideoGeneration
         input: {
             personality: {
                 id: id,
-                prompt: description,
+                prompt: description.split('\n'),
                 video_objects: [videoFile],
                 audio_objects: [audioFile],
                 language: "ru",
