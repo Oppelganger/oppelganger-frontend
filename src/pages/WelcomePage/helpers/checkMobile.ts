@@ -1,4 +1,4 @@
-export function checkMobile() {
+export default function checkMobile() {
     let check = false
     if (navigator.userAgent.match(/Android/i)
         || navigator.userAgent.match(/webOS/i)

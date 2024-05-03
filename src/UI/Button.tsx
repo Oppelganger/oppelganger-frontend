@@ -11,7 +11,7 @@ type CreateNewProfileProps = {
 const Button: React.FC<CreateNewProfileProps> = ({ disabled = false, background, text, children, colorHover, clickHandler, width = 'w-full' }) => {
     return (
         <button
-            onClick={clickHandler}
+            onClick={(e) => { e.preventDefault(); clickHandler && clickHandler(e) }}
             disabled={disabled}
             className={`
             py-[8rem] px-[22rem] ${width} h-[70rem] 

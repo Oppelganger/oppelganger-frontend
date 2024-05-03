@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import WelcomePage from './pages/WelcomePage'
-import CreateNewProfilePage from './pages/CreateNewProfilePage'
+import WelcomePage from './pages/WelcomePage/index'
+import CreateNewProfilePage from './pages/CreateNewProfilePage/index'
+
+const VideoGenerationPage = lazy(() => import("./pages/VideoGenerationPage/index"));
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/create",
     element: <CreateNewProfilePage />
+  },
+  {
+    path: "/generation",
+    element: <VideoGenerationPage />
   }
 ])
 
@@ -22,6 +28,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <div className='animate-in fade-in-5 duration-700 w-full'>
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>
 )

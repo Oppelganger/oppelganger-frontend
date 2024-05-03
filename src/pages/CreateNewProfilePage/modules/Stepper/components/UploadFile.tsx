@@ -1,7 +1,7 @@
-import Button from './Button'
-import { ReactComponent as Cloud } from '../assets/cloud.svg'
+import Button from '../../../../../UI/Button'
+import { ReactComponent as Cloud } from '../../../../../assets/cloud.svg'
 import { useRef } from 'react'
-import { useCreateNewProfileStore } from '../store/store'
+import { useCreateNewProfileStore } from '../../../store/store'
 
 type UploadFileProps = {
     fileType: 'video' | 'audio'
@@ -21,7 +21,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ fileType }) => {
                     setVideoFile(file)
                 }
             } else {
-                alert(`Выбранный файл не является ${fileType}-файлом.`)
+                alert(`Выбранный файл не является ${fileType}-файлом`)
             }
         }
     }

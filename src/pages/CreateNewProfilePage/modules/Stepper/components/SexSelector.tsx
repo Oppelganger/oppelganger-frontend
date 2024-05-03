@@ -1,4 +1,4 @@
-import { useCreateNewProfileStore } from "../store/store"
+import { useCreateNewProfileStore } from "../../../store/store"
 
 const SexSelector = () => {
     const { sex, selectSex } = useCreateNewProfileStore()
@@ -25,8 +25,7 @@ const SexSelector = () => {
                     />
                     <label>{sexItem}</label>
                 </div>
-            ))
-            }
+            ))}
         </form>
     )
 }

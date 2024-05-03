@@ -1,11 +1,16 @@
 import useSWR from "swr"
-import { fetcher } from "../api/api"
-import { checkMobile } from "../utils/checkMobile"
+import { fetcherGET } from "../../../api/api"
+import checkMobile from "../helpers/checkMobile"
+
+type CompatibilityResponse = {
+    "message": string,
+    "supported": boolean
+}
 
 export default function useCompatibility() {
     const isMobile = checkMobile()
-    
-    const { data, isLoading } = useSWR(isMobile ? null : `/check_gpu_driver`, fetcher, {
+
+    const { data, isLoading } = useSWR(isMobile ? null : `/check_gpu_driver`, fetcherGET<CompatibilityResponse>, {
         shouldRetryOnError: !isMobile,
         errorRetryInterval: 1000,
     })

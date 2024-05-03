@@ -1,11 +1,11 @@
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Button from '../components/Button'
+import Footer from './UI/Footer'
+import Button from '../../UI/Button'
 import { useRef } from 'react'
-import { ReactComponent as Cloud } from '../assets/cloud.svg'
-import CompatibilityCheck from '../components/CompatibilityCheck'
-import useCompatibility from '../hooks/useCompatibility'
+import { ReactComponent as Cloud } from '../../assets/cloud.svg'
+import CompatibilityCheck from './components/CompatibilityCheck'
+import useCompatibility from './hooks/useCompatibility'
 import { useNavigate } from 'react-router-dom'
+import DividerHorizontalLine from '../../UI/DividerHorizontalLine'
 
 const WelcomePage = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -23,19 +23,17 @@ const WelcomePage = () => {
   return (
     <div className='px-[240rem] mx-[auto]'>
       <div className='flex flex-col justify-between h-[100vh]'>
-        <div className='pt-[70rem]'>
-          <Header />
-        </div>
+        <p className="flex pt-[70rem] justify-center text-[48rem]/[116%] w-full font-oddval text-center mb-[5.6rem]">
+          Имитация живого видео-ответа современными генеративными моделями
+        </p>
 
-        <div className='flex justify-center items-center flex-col gap-[12rem]'>
-          <CompatibilityCheck
-            isLoading={isLoading}
-            compatible={compatible}
-            message={message} />
-        </div>
+        <CompatibilityCheck
+          isLoading={isLoading}
+          compatible={compatible}
+          message={message} />
 
         <div className='flex flex-col gap-[32rem] items-center pb-[50rem]'>
-          <hr className='h-[2rem] border-[#00000020] w-full' />
+          <DividerHorizontalLine />
 
           <div className='flex items-center justify-center gap-[32rem] h-full px-[200rem]'>
             <Button
