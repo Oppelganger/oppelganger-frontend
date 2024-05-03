@@ -7,10 +7,13 @@ import { getRequestStatus, requestStatusResponse } from './api/getRequestStatus'
 import { useEffect, useState } from 'react'
 
 const VideoGenerationPage = () => {
-    const { sex, description, audioFile, videoFile, id, prompt, setPrompt } = useVideoGenerationStore()
+    const { sex, description, id, prompt, setPrompt } = useVideoGenerationStore()
     const [message, setMessage] = useState('Отправка запроса...')
-    const [video, setVideo] = useState<string | undefined>('https://www.youtube.com/watch?v=mRcbXjQze7A')
+    const [video, setVideo] = useState<string | undefined>('')
     const [requesting, setRequesting] = useState(false)
+
+    const audioFile = 'audio.ogg'
+    const videoFile = 'video.mp4'
 
     useEffect(() => {
         let isMounted = true;
@@ -80,6 +83,7 @@ const VideoGenerationPage = () => {
                         />
 
                         <Button
+                            prevent={true}
                             clickHandler={handleGenerateVideo}
                             text='Отправить'
                             background='bg-[--primary]'

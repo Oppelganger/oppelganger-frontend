@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { CreateNewProfileProps, useGlobalStore } from '../../../store/globalStore'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 export type VideoGenerationStoreProps = {
     prompt: string
@@ -9,11 +10,11 @@ export type VideoGenerationStoreSetters = {
     setPrompt: (id: string) => void
 }
 
-export const useVideoGenerationStore = create<CreateNewProfileProps & VideoGenerationStoreProps & VideoGenerationStoreSetters>((set) => ({
+export const useVideoGenerationStore = create(persist<CreateNewProfileProps & VideoGenerationStoreProps & VideoGenerationStoreSetters>((set) => ({
     sex: "male",
     description: "",
-    videoFile: null,
-    audioFile: null,
+    videoFile: '',
+    audioFile: '',
     id: "",
     prompt: "",
 
@@ -23,5 +24,9 @@ export const useVideoGenerationStore = create<CreateNewProfileProps & VideoGener
         set({ sex, description, videoFile, audioFile, id, });
     })(),
 
-    setPrompt: (prompt) => set({ prompt })
-}))
+    setPrompt: (prompt) => set({ prompt }),
+}),
+    {
+        name: 'video-generation-store', storage: createJSONStorage(() => sessionStorage) // Name of the key for storing the state in local storage
+    }
+))

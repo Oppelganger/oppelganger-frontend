@@ -6,12 +6,13 @@ type CreateNewProfileProps = {
     colorHover?: string
     clickHandler?: (e: React.MouseEvent<HTMLButtonElement>) => void
     width?: string
+    prevent?: boolean
 }
 
-const Button: React.FC<CreateNewProfileProps> = ({ disabled = false, background, text, children, colorHover, clickHandler, width = 'w-full' }) => {
+const Button: React.FC<CreateNewProfileProps> = ({ prevent = false, disabled = false, background, text, children, colorHover, clickHandler, width = 'w-full' }) => {
     return (
         <button
-            onClick={(e) => { e.preventDefault(); clickHandler && clickHandler(e) }}
+            onClick={(e) => { prevent && e.preventDefault(); clickHandler && clickHandler(e) }}
             disabled={disabled}
             className={`
             py-[8rem] px-[22rem] ${width} h-[70rem] 

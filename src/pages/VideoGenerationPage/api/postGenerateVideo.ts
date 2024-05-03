@@ -7,8 +7,8 @@ export type GenerateVideoRequestType = {
         "personality": {
             "id": string,
             "prompt": string[] | string,
-            "video_objects": [File],
-            "audio_objects": [File],
+            "video_objects": [string],
+            "audio_objects": [string],
             "language": "ru",
             "enhance": true,
             "female": boolean
@@ -37,15 +37,16 @@ const messages = [
 ]
 
 export const postGenerateVideo = (props: CreateNewProfileProps & VideoGenerationStoreProps) => {
-    const { id, description, audioFile, videoFile, sex, prompt } = props;
-
+    const { id, description, sex, prompt } = props;
+    const audioFile = 'audio.ogg'
+    const videoFile = 'video.mp4'
     const request: GenerateVideoRequestType = {
         input: {
             personality: {
                 id: id,
                 prompt: description,
-                video_objects: [videoFile as File],
-                audio_objects: [audioFile as File],
+                video_objects: [videoFile],
+                audio_objects: [audioFile],
                 language: "ru",
                 enhance: true,
                 female: sex === "female" ? true : false,

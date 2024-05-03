@@ -16,9 +16,9 @@ const UploadFile: React.FC<UploadFileProps> = ({ fileType }) => {
         if (file) {
             if (file.type.startsWith(`${fileType}/`)) {
                 if (fileType === 'audio') {
-                    setAudioFile(file)
+                    setAudioFile(file.name)
                 } else {
-                    setVideoFile(file)
+                    setVideoFile(file.name)
                 }
             } else {
                 alert(`Выбранный файл не является ${fileType}-файлом`)

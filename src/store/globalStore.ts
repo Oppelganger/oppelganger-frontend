@@ -1,19 +1,20 @@
 import { create } from "zustand";
 import { useCreateNewProfileStore } from "../pages/CreateNewProfilePage/store/store";
+import { persist } from "zustand/middleware";
 
 export type CreateNewProfileProps = {
     id: string
     sex: "male" | "female"
     description: string
-    videoFile: File | null
-    audioFile: File | null
+    videoFile: string
+    audioFile: string
 }
 
-export const useGlobalStore = create<CreateNewProfileProps>((set) => ({
+export const useGlobalStore = create(persist<CreateNewProfileProps>((set) => ({
     sex: "male",
     description: "",
-    videoFile: null,
-    audioFile: null,
+    videoFile: '',
+    audioFile: '',
     id: "",
     prompt: "",
 
@@ -22,4 +23,8 @@ export const useGlobalStore = create<CreateNewProfileProps>((set) => ({
 
         set({ sex, description, videoFile, audioFile, id, });
     })(),
-}))
+}), {
+    name: "global-storage",
+    getStorage: () => sessionStorage,
+}
+))
