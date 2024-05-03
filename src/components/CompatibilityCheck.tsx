@@ -1,5 +1,5 @@
 import { ReactComponent as Loader } from '../assets/loader.svg'
-import { ReactComponent as Xmark } from '../assets/Xmark.svg'
+import { ReactComponent as FailMark } from '../assets/FailMark.svg'
 import { ReactComponent as SuccessMark } from '../assets/SuccessMark.svg'
 
 type CompatibilityCheckProps = {
@@ -20,12 +20,14 @@ const CompatibilityCheck: React.FC<CompatibilityCheckProps> = ({ isLoading, comp
     }
 
     return (<>
-        {compatible
-            ?
-            <SuccessMark />
-            :
-            <Xmark />
-        }
+        <span className="w-[40rem] h-[40rem] block">
+            {compatible
+                ?
+                <SuccessMark />
+                :
+                <FailMark />
+            }
+        </span>
 
         <p>{message}</p>
     </>)

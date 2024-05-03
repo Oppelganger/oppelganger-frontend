@@ -9,9 +9,7 @@ export const fetcher = async (url: string) => {
         const res = await fetch(HOST + url)
 
         if (!res.ok) {
-            let errorMessage = 'Произошла ошибка во время загрузки данных'
-
-            const error = new Error(errorMessage)
+            const error = new Error('Произошла ошибка во время загрузки данных')
             error.cause = res.status
             throw error
         }

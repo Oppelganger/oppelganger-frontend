@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import WelcomePage from './pages/WelcomePage'
+import CreateNewProfilePage from './pages/CreateNewProfilePage'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <WelcomePage />
+  },
+  {
+    path: "/create",
+    element: <CreateNewProfilePage />
   }
 ])
 

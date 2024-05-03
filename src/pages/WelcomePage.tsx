@@ -4,12 +4,21 @@ import Button from '../components/Button'
 import { useRef } from 'react'
 import { ReactComponent as Cloud } from '../assets/cloud.svg'
 import CompatibilityCheck from '../components/CompatibilityCheck'
-
 import useCompatibility from '../hooks/useCompatibility'
+import { useNavigate } from 'react-router-dom'
 
 const WelcomePage = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const { compatible, message, isLoading } = useCompatibility()
+  const navigate = useNavigate()
+
+  function handleNewProfileClick() {
+    navigate('/create')
+  }
+
+  function handleUploadProfileClick() {
+    inputRef.current?.click()
+  }
 
   return (
     <div className='px-[240rem] mx-[auto]'>
@@ -33,6 +42,7 @@ const WelcomePage = () => {
               background='bg-[--primary]'
               text='Создать новый профиль'
               disabled={!compatible || isLoading}
+              clickHandler={handleNewProfileClick}
             />
 
             <Button
@@ -40,7 +50,7 @@ const WelcomePage = () => {
               text='Загрузить'
               disabled={!compatible || isLoading}
               width='w-fit'
-              clickHandler={() => inputRef.current?.click()}
+              clickHandler={handleUploadProfileClick}
             >
               <Cloud className='mr-[8rem] ml-[-4rem]' />
               <input ref={inputRef} className='custom-input' type='file' />

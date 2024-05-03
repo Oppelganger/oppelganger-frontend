@@ -5,7 +5,14 @@ module.exports = {
     fontFamily: {
       'oddval': ['Oddval'],
       'onest': ['Onest']
+    },
+    extend: {
+      transitionDelay: {
+        '160': '160ms',
+      }
     }
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-animate")
+  ],
 }

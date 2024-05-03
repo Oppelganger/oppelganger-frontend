@@ -12,7 +12,7 @@
 
 html {
   font-size: var(--scale);
-} 
+}
 
 @media only screen and (max-width: 639px) {
   :root {
@@ -24,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #EFEFEF;
-  font-size: 16rem;
+  font-size: 16rem !important;
 }
 
 * {
@@ -32,28 +32,24 @@ body {
   font-family: 'Onest';
 }
 
-:hover {
-  color: var(--hover-color);
-}
-
 .custom-shadow {
-  box-shadow: 0rem 3rem 1rem -2rem rgba(0,0,0,0.2), 0rem 2rem 2rem 0rem rgba(0,0,0,0.14), 0rem 1rem 5rem 0rem rgba(0,0,0,0.12);
+  box-shadow: 0rem 3rem 1rem -2rem rgba(0, 0, 0, 0.2), 0rem 2rem 2rem 0rem rgba(0, 0, 0, 0.14), 0rem 1rem 5rem 0rem rgba(0, 0, 0, 0.12);
 }
 
 .custom-shadow:hover {
-  box-shadow: 0rem 2rem 4rem -1rem rgba(0,0,0,0.2), 0rem 4rem 5rem 0rem rgba(0,0,0,0.14), 0rem 1rem 10rem 0rem rgba(0,0,0,0.12);
+  box-shadow: 0rem 2rem 4rem -1rem rgba(0, 0, 0, 0.2), 0rem 4rem 5rem 0rem rgba(0, 0, 0, 0.14), 0rem 1rem 10rem 0rem rgba(0, 0, 0, 0.12);
 }
 
 .custom-shadow:active {
-  box-shadow: 0rem 5rem 5rem -3rem rgba(0,0,0,0.2), 0rem 8rem 10rem 1rem rgba(0,0,0,0.14), 0rem 3rem 14rem 2rem rgba(0,0,0,0.12);
+  box-shadow: 0rem 5rem 5rem -3rem rgba(0, 0, 0, 0.2), 0rem 8rem 10rem 1rem rgba(0, 0, 0, 0.14), 0rem 3rem 14rem 2rem rgba(0, 0, 0, 0.12);
 }
 
 .custom-shadow:disabled:hover {
-  box-shadow: 0rem 3rem 1rem -2rem rgba(0,0,0,0.2), 0rem 2rem 2rem 0rem rgba(0,0,0,0.14), 0rem 1rem 5rem 0rem rgba(0,0,0,0.12);
+  box-shadow: 0rem 3rem 1rem -2rem rgba(0, 0, 0, 0.2), 0rem 2rem 2rem 0rem rgba(0, 0, 0, 0.14), 0rem 1rem 5rem 0rem rgba(0, 0, 0, 0.12);
 }
 
 .custom-shadow:disabled:active {
-  box-shadow: 0rem 3rem 1rem -2rem rgba(0,0,0,0.2), 0rem 2rem 2rem 0rem rgba(0,0,0,0.14), 0rem 1rem 5rem 0rem rgba(0,0,0,0.12);
+  box-shadow: 0rem 3rem 1rem -2rem rgba(0, 0, 0, 0.2), 0rem 2rem 2rem 0rem rgba(0, 0, 0, 0.14), 0rem 1rem 5rem 0rem rgba(0, 0, 0, 0.12);
 }
 
 .custom-input {
@@ -79,4 +75,21 @@ body {
   src: url(/public/fonts/Oddval-SemiBold.ttf) format('truetype');
   font-style: normal;
   font-weight: 400;
+}
+
+.checkbox-round {
+  width: 1.3em;
+  height: 1.3em;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.checkbox-round:checked {
+  background-color: gray;
 }
