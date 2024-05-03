@@ -1,6 +1,6 @@
 Building:
 ```shell
-$ docker buildx build . --tag personality-frontend:latest
+$ docker buildx build . --tag funcid/oppenganger-frontend:latest
 ```
 
 # Getting Started with Create React App
