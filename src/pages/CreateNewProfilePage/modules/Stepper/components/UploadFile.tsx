@@ -9,17 +9,15 @@ type UploadFileProps = {
 
 const UploadFile: React.FC<UploadFileProps> = ({ fileType }) => {
     const inputRef = useRef<HTMLInputElement>(null)
-    const { setVideoFile, setAudioFile } = useCreateNewProfileStore()
+    const store = useCreateNewProfileStore()
+    const setFile = fileType === 'audio' ? store.setAudioFile : store.setVideoFile
+    const file = fileType === 'audio' ? store.audioFile : store.videoFile
 
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0]
         if (file) {
             if (file.type.startsWith(`${fileType}/`)) {
-                if (fileType === 'audio') {
-                    setAudioFile(file.name)
-                } else {
-                    setVideoFile(file.name)
-                }
+                setFile(file.name)
             } else {
                 alert(`Выбранный файл не является ${fileType}-файлом`)
             }
@@ -33,7 +31,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ fileType }) => {
     return (
         <Button
             background='bg-[transparent] border-[4rem] border-[--primary] w-full text-[--primary]'
-            text='Загрузить'
+            text={file ? file : 'Загрузить'}
             width='w-fit'
             clickHandler={clickHandler}
         >

@@ -9,6 +9,6 @@ COPY tsconfig.json /app/
 COPY postcss.config.js /app/
 COPY tailwind.config.js /app/
 
-RUN npm install
+RUN yarn install
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

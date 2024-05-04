@@ -52,7 +52,7 @@ const Stepper = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
 
-    return (<>
+    return (<div className='flex flex-col w-full'>
         {steps.map((step, index) => (
             <Fragment key={step.label}>
                 <StepLabel
@@ -73,7 +73,7 @@ const Stepper = () => {
                 <StepVerticalLine activeStep={activeStep} index={index} steps={steps} />
             </Fragment>
         ))}
-    </>)
+    </div>)
 }
 
 export default Stepper

@@ -22,7 +22,7 @@ const Button: React.FC<CreateNewProfileProps> = ({ prevent = false, disabled = f
             `}
         >
             {children}
-            {text}
+            <span className="text-[16rem]/[100%]">{text}</span>
         </button >
     )
 }
