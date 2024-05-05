@@ -12,50 +12,45 @@ const VideoGenerationPage = () => {
     const { prompt, setPrompt } = useVideoGenerationStore()
     const [message, setMessage] = useState('Отправка запроса...')
     const [video, setVideo] = useState<string>('')
-    const [requesting, setRequesting] = useState(false)
-    const [loading, setLoading] = useState(true)
-    
-    useEffect(() => {
-        let isMounted = true
+    const [loading, setLoading] = useState(false)
 
+    useEffect(() => {
         const fetchRequestStatus = async () => {
             try {
                 const videoStatusResponse = await getRequestStatus() as requestStatusResponse
-                if (isMounted) {
-                    setMessage(videoStatusResponse.stage)
-                }
+                setMessage(videoStatusResponse.stage)
+
             } catch (error) {
                 console.error("Error fetching request status:", error)
             }
         }
 
-        let interval
+        let interval: NodeJS.Timer | undefined
 
-        if (requesting) {
+        if (loading) {
             const handleVideoGeneration = async () => {
                 try {
                     const generateVideoResponse = await postGenerateVideo({ sex, description, audioFile, videoFile, id, prompt }) as GenerateVideoResponseType
                     setVideo(generateVideoResponse.object)
-                    setRequesting(false)
+                    setLoading(false)
                 } catch (error) {
                     console.error("Error generating video:", error)
                 }
             }
             handleVideoGeneration()
-            console.log('YES')
 
             interval = setInterval(fetchRequestStatus, 500)
         }
 
-        if (!requesting) {
+        if (interval && !loading) {
             clearInterval(interval)
         }
 
-        return () => { isMounted = false }
-    }, [requesting, sex, description, audioFile, videoFile, id, prompt])
+        return () => clearInterval(interval)
+    }, [sex, description, audioFile, videoFile, id, prompt, loading])
 
     const handleGenerateVideo = () => {
-        setRequesting(true)
+        setLoading(true)
     }
 
     return (
@@ -70,7 +65,9 @@ const VideoGenerationPage = () => {
                 <div className='w-full flex flex-col gap-[2rem]'>
                     <p className='font-onest text-[24rem]'>Задайте запрос</p>
 
-                    <div className='grid grid-cols-[calc(80%-8rem)_calc(20%-8rem)] gap-[16rem]'>
+                    <form className='grid grid-cols-[calc(80%-8rem)_calc(20%-8rem)] gap-[16rem]'
+                        onSubmit={handleGenerateVideo}
+                    >
                         <InputField
                             placeholder='Как собрать грибную поляну?'
                             value={prompt}
@@ -79,12 +76,13 @@ const VideoGenerationPage = () => {
                         />
 
                         <Button
+                            disabled={loading}
                             prevent={true}
                             clickHandler={handleGenerateVideo}
                             text='Отправить'
                             background='bg-[--primary]'
                         />
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
