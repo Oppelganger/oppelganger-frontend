@@ -23,6 +23,7 @@ export type GenerateVideoResponseType = {
     text: string
     object: string
     object_type: "video"
+    object_url: string
 }
 
 const messages = [

@@ -31,7 +31,7 @@ const VideoGenerationPage = () => {
             const handleVideoGeneration = async () => {
                 try {
                     const generateVideoResponse = await postGenerateVideo({ sex, description, audioFile, videoFile, id, prompt }) as GenerateVideoResponseType
-                    const videoLink = generateVideoResponse.object.replace('minio', '127.0.0.1')
+                    const videoLink = generateVideoResponse.object_url.replace('minio', '127.0.0.1')
                     setVideo(videoLink)
                     setLoading(false)
                 } catch (error) {
