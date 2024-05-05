@@ -1,8 +1,7 @@
 import ProceedToGenerationButton from './ProceedToGenerationButton'
 import { stepType } from '..'
 import Button from '../../../../../UI/Button'
-import { useEffect, useState } from 'react'
-import { useCreateNewProfileStore } from '../../../store/store'
+import ContinueButton from './ContinueButton'
 
 type StepBodyProps = {
     step: stepType,
@@ -15,19 +14,6 @@ type StepBodyProps = {
 }
 
 const StepBody: React.FC<StepBodyProps> = ({ step, index, activeStep, steps, handleNext, handleBack }) => {
-    const [stepData, setStepData] = useState<Array<'male' | 'female' | string | File | null>>([])
-    const { sex, description, audioFile, videoFile, id } = useCreateNewProfileStore()
-
-    useEffect(() => {
-        setStepData([
-            id,
-            description,
-            sex,
-            audioFile,
-            videoFile
-        ])
-    }, [id, description, sex, audioFile, videoFile])
-
     return (
         <div className={`${activeStep >= index + 1 ? 'border-l-[--primary]' : 'border-l-[gray]'} ml-[20rem] border-l-[1rem] pl-[100rem] h-fit`}>
             <div className={`
@@ -44,11 +30,7 @@ const StepBody: React.FC<StepBodyProps> = ({ step, index, activeStep, steps, han
                             ?
                             <ProceedToGenerationButton />
                             :
-                            <Button background='bg-[--primary]'
-                                disabled={!stepData[index]}
-                                clickHandler={handleNext}
-                                text='Продолжить'
-                            />
+                            <ContinueButton handleNext={handleNext} index={index}/>
                         }
                     </div>
 

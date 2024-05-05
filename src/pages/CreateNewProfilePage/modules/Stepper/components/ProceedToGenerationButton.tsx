@@ -1,11 +1,19 @@
 import { useNavigate } from "react-router-dom"
 import Button from "../../../../../UI/Button"
+import { useGlobalStore } from "../../../../../store/globalStore"
+import { useCreateNewProfileStore } from "../../../store/store"
+import { startTransition } from "react"
 
 const ProceedToGenerationButton = () => {
     const navigate = useNavigate()
+    const globalStore = useGlobalStore()
+    const { audioFile, id, description, sex, videoFile } = useCreateNewProfileStore()
 
     const proceedGeneration = () => {
-        navigate('/generation')
+        startTransition(() => {
+            globalStore.setInitialData({ audioFile, id, description, sex, videoFile })
+            navigate('/generation')
+        })
     }
 
     return (

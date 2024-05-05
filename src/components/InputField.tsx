@@ -14,7 +14,7 @@ const InputField: React.FC<InputFieldProps> = ({ rounded = 'rounded-[6rem]', pla
   return (
     <textarea
       className={`
-          w-full h-[auto] min-h-[50rem] overflow-auto max-h-[130rem] resize-none border-[1rem] border-[gray] py-[4rem] px-[12rem]
+          w-full h-[auto] min-h-[50rem] overflow-auto max-h-[130rem] resize-none border-[1rem] border-[gray] py-[6rem] px-[12rem]
           ${rounded}
       `}
       maxLength={10000}

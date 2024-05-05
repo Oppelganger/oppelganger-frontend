@@ -5,23 +5,23 @@ import { VideoGenerationStoreProps } from "../store/store"
 export type GenerateVideoRequestType = {
     "input": {
         "personality": {
-            "id": string,
-            "prompt": string[],
-            "video_objects": [string],
-            "audio_objects": [string],
-            "language": "ru",
-            "enhance": true,
+            "id": string
+            "prompt": string[]
+            "video_objects": [string]
+            "audio_objects": [string]
+            "language": "ru"
+            "enhance": true
             "female": boolean
         },
-        "messages": typeof messages,
-        "response_type": "video",
+        "messages": typeof messages
+        "response_type": "video"
         "prompt": string
     }
 }
 
 export type GenerateVideoResponseType = {
-    text: string,
-    object: string,
+    text: string
+    object: string
     object_type: "video"
 }
 
@@ -37,9 +37,8 @@ const messages = [
 ]
 
 export const postGenerateVideo = (props: CreateNewProfileProps & VideoGenerationStoreProps) => {
-    const { id, description, sex, prompt } = props;
-    const audioFile = 'audio.ogg'
-    const videoFile = 'video.mp4'
+    const { id, description, sex, prompt, audioFile, videoFile } = props
+
     const request: GenerateVideoRequestType = {
         input: {
             personality: {
@@ -55,7 +54,7 @@ export const postGenerateVideo = (props: CreateNewProfileProps & VideoGeneration
             response_type: "video",
             prompt: prompt
         },
-    };
+    }
 
-    return fetcherPOST<GenerateVideoResponseType>('/send_request', request);
-};
+    return fetcherPOST<GenerateVideoResponseType>('/send_request', request)
+}

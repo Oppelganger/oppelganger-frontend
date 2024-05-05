@@ -1,75 +1,70 @@
 import InputField from '../../components/InputField'
 import Button from '../../UI/Button'
-import LoaderWithMessage from '../../components/LoaderWithMessage'
-import { useVideoGenerationStore } from './store/store'
 import { GenerateVideoResponseType, postGenerateVideo } from './api/postGenerateVideo'
 import { getRequestStatus, requestStatusResponse } from './api/getRequestStatus'
 import { useEffect, useState } from 'react'
+import VideoPlayer from './component/VideoPlayer'
+import { useGlobalStore } from '../../store/globalStore'
+import { useVideoGenerationStore } from './store/store'
 
 const VideoGenerationPage = () => {
-    const { sex, description, id } = useVideoGenerationStore()
+    const { sex, description, id, audioFile, videoFile } = useGlobalStore()
+    const { prompt, setPrompt } = useVideoGenerationStore()
     const [message, setMessage] = useState('Отправка запроса...')
-    const [video, setVideo] = useState<string | undefined>('')
+    const [video, setVideo] = useState<string>('')
     const [requesting, setRequesting] = useState(false)
-    const [prompt, setPrompt] = useState('')
-
-    const audioFile = 'audio.ogg'
-    const videoFile = 'video.mp4'
-
+    const [loading, setLoading] = useState(true)
+    
     useEffect(() => {
-        let isMounted = true;
+        let isMounted = true
 
         const fetchRequestStatus = async () => {
             try {
-                const videoStatusResponse = await getRequestStatus() as requestStatusResponse;
+                const videoStatusResponse = await getRequestStatus() as requestStatusResponse
                 if (isMounted) {
-                    setMessage(videoStatusResponse.stage);
+                    setMessage(videoStatusResponse.stage)
                 }
             } catch (error) {
-                console.error("Error fetching request status:", error);
+                console.error("Error fetching request status:", error)
             }
-        };
+        }
 
         let interval
 
         if (requesting) {
             const handleVideoGeneration = async () => {
                 try {
-                    const generateVideoResponse = await postGenerateVideo({ sex, description, audioFile, videoFile, id, prompt }) as GenerateVideoResponseType;
-                    setVideo(generateVideoResponse.object);
-                    setRequesting(false);
+                    const generateVideoResponse = await postGenerateVideo({ sex, description, audioFile, videoFile, id, prompt }) as GenerateVideoResponseType
+                    setVideo(generateVideoResponse.object)
+                    setRequesting(false)
                 } catch (error) {
-                    console.error("Error generating video:", error);
+                    console.error("Error generating video:", error)
                 }
-            };
-            handleVideoGeneration();
+            }
+            handleVideoGeneration()
             console.log('YES')
 
-            interval = setInterval(fetchRequestStatus, 500);
+            interval = setInterval(fetchRequestStatus, 500)
         }
 
         if (!requesting) {
             clearInterval(interval)
         }
 
-        return () => { isMounted = false; };
-    }, [requesting, sex, description, audioFile, videoFile, id, prompt]);
+        return () => { isMounted = false }
+    }, [requesting, sex, description, audioFile, videoFile, id, prompt])
 
     const handleGenerateVideo = () => {
-        setRequesting(true);
-    };
+        setRequesting(true)
+    }
 
     return (
         <div className='w-full flex justify-center h-screen'>
-            <div className='pt-[50rem] flex flex-col gap-[32rem] pb-[40rem]'>
+            <div className='pt-[50rem] flex flex-col gap-[32rem]'>
                 <div className='w-full flex flex-col gap-[8rem]'>
                     <p className='font-oddval text-[32rem] text-center'>Интерактивная страница</p>
 
-                    <div className='aspect-video flex justify-center items-center bg-[gray] h-[400rem] rounded-[48rem] bg-gradient-to-br from-[#D0D0D0] via-60% via-[#E0E0E0] to-[#D0D0D0] '>
-                        <video src={video} className='w-full h-full' />
-
-                        <LoaderWithMessage message={message} />
-                    </div>
+                    <VideoPlayer loading={loading} video={video} message={message} />
                 </div>
 
                 <div className='w-full flex flex-col gap-[2rem]'>

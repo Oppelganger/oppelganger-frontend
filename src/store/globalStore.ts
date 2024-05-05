@@ -1,6 +1,4 @@
-import { create } from "zustand";
-import { useCreateNewProfileStore } from "../pages/CreateNewProfilePage/store/store";
-import { persist } from "zustand/middleware";
+import { create } from "zustand"
 
 export type CreateNewProfileProps = {
     id: string
@@ -10,7 +8,11 @@ export type CreateNewProfileProps = {
     audioFile: string
 }
 
-export const useGlobalStore = create(persist<CreateNewProfileProps>((set) => ({
+type GlobalStoreSetters = {
+    setInitialData: ({ ...args }: CreateNewProfileProps) => void
+}
+
+export const useGlobalStore = create<CreateNewProfileProps & GlobalStoreSetters>((set, get) => ({
     sex: "male",
     description: "",
     videoFile: '',
@@ -18,13 +20,7 @@ export const useGlobalStore = create(persist<CreateNewProfileProps>((set) => ({
     id: "",
     prompt: "",
 
-    getInitialData: (() => {
-        const { sex, description, videoFile, audioFile, id } = useCreateNewProfileStore.getState();
-
-        set({ sex, description, videoFile, audioFile, id, });
-    })(),
-}), {
-    name: "global-storage",
-    getStorage: () => sessionStorage,
-}
-))
+    setInitialData: (({ ...args }) => {
+        set(args)
+    }),
+}))

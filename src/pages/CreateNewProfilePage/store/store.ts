@@ -1,4 +1,3 @@
-import { createJSONStorage, persist } from 'zustand/middleware';
 import { create } from 'zustand'
 import { CreateNewProfileProps } from '../../../store/globalStore'
 export type CreateNewProfileSetters = {
@@ -9,7 +8,7 @@ export type CreateNewProfileSetters = {
     setAudioFile: (audioFile: string) => void
 }
 
-export const useCreateNewProfileStore = create(persist<CreateNewProfileProps & CreateNewProfileSetters>(
+export const useCreateNewProfileStore = create<CreateNewProfileProps & CreateNewProfileSetters>(
     (set) => ({
         sex: "male",
         description: "",
@@ -22,8 +21,4 @@ export const useCreateNewProfileStore = create(persist<CreateNewProfileProps & C
         setDescription: (description: string) => set({ description }),
         setVideoFile: (videoFile: string) => set({ videoFile }),
         setAudioFile: (audioFile: string) => set({ audioFile })
-    }),
-    {
-        name: 'food-storage', // name of the item in the storage (must be unique)
-        storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
-    },))
+    }))
