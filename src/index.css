@@ -16,7 +16,7 @@ html {
 
 @media only screen and (max-width: 639px) {
   :root {
-    --scale: 0.33vw;
+    --scale: 0.08vw;
   }
 }
 
