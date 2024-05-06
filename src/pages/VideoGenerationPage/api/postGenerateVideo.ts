@@ -1,6 +1,5 @@
 import { fetcherPOST } from "../../../api/api"
 import { CreateNewProfileProps } from '../../../store/globalStore'
-import { VideoGenerationStoreProps } from "../store/store"
 
 export type GenerateVideoRequestType = {
     "input": {
@@ -10,7 +9,7 @@ export type GenerateVideoRequestType = {
             "video_objects": [string]
             "audio_objects": [string]
             "language": "ru"
-            "enhance": true
+            "enhance": boolean
             "female": boolean
         },
         "messages": typeof messages
@@ -37,8 +36,8 @@ const messages = [
     }
 ]
 
-export const postGenerateVideo = (props: CreateNewProfileProps & VideoGenerationStoreProps) => {
-    const { id, description, sex, prompt, audioFile, videoFile } = props
+export const postGenerateVideo = (props: CreateNewProfileProps & { enhance: boolean, prompt: string }) => {
+    const { id, description, sex, prompt, audioFile, videoFile, enhance } = props
 
     const request: GenerateVideoRequestType = {
         input: {
@@ -48,7 +47,7 @@ export const postGenerateVideo = (props: CreateNewProfileProps & VideoGeneration
                 video_objects: [videoFile],
                 audio_objects: [audioFile],
                 language: "ru",
-                enhance: true,
+                enhance: enhance,
                 female: sex === "female" ? true : false,
             },
             messages,

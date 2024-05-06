@@ -6,19 +6,22 @@ type CreateNewProfileProps = {
     colorHover?: string
     clickHandler?: (e: React.MouseEvent<HTMLButtonElement>) => void
     width?: string
+    height?: string
     prevent?: boolean
+    noShadow?: boolean
 }
 
-const Button: React.FC<CreateNewProfileProps> = ({ prevent = false, disabled = false, background, text, children, colorHover, clickHandler, width = 'w-full' }) => {
+const Button: React.FC<CreateNewProfileProps> = ({ noShadow = false, height = 'h-[70rem]', prevent = false, disabled = false, background, text, children, colorHover, clickHandler, width = 'w-full' }) => {
     return (
         <button
             onClick={(e) => { prevent && e.preventDefault(); clickHandler && clickHandler(e) }}
             disabled={disabled}
             className={`
-            py-[8rem] px-[22rem] ${width} h-[70rem] 
-            text-[#FFF] disabled:opacity-50 text-[15rem] font-bold font-onest uppercase rounded-[20rem] custom-shadow text-center
+            py-[8rem] px-[22rem] ${width} ${height}
+            text-[#FFF] disabled:opacity-50 text-[15rem] font-bold font-onest uppercase rounded-[20rem] text-center
             flex justify-center items-center
-            transition-all duration-300 ${background} ${colorHover}
+            transition-all duration-300 ${background} ${colorHover} ${noShadow ? '' : 'custom-shadow'}
+
             `}
         >
             {children}

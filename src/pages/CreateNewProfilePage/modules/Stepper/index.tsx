@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Suspense, useState } from 'react'
 import SexSelector from './components/SexSelector'
 import UploadFile from './components/UploadFile'
 import IdInput from './components/IdInput'
@@ -54,7 +54,7 @@ const Stepper = () => {
 
     return (<div className='flex flex-col w-full'>
         {steps.map((step, index) => (
-            <Fragment key={step.label}>
+            <Suspense fallback={<div>Loading</div>} key={step.label}>
                 <StepLabel
                     activeStep={activeStep}
                     index={index}
@@ -71,7 +71,7 @@ const Stepper = () => {
                 />
 
                 <StepVerticalLine activeStep={activeStep} index={index} steps={steps} />
-            </Fragment>
+            </Suspense>
         ))}
     </div>)
 }

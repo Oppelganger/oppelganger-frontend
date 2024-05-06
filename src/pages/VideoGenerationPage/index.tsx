@@ -5,11 +5,12 @@ import { getRequestStatus, requestStatusResponse } from './api/getRequestStatus'
 import { useEffect, useState } from 'react'
 import VideoPlayer from './component/VideoPlayer'
 import { useGlobalStore } from '../../store/globalStore'
-import { useVideoGenerationStore } from './store/store'
+import Header from './component/Header'
 
 const VideoGenerationPage = () => {
     const { sex, description, id, audioFile, videoFile } = useGlobalStore()
-    const { prompt, setPrompt } = useVideoGenerationStore()
+    const [prompt, setPrompt] = useState('')
+    const [enhance, setEnhance] = useState(true)
     const [message, setMessage] = useState('Отправка запроса...')
     const [video, setVideo] = useState<string>('')
     const [loading, setLoading] = useState(false)
@@ -30,7 +31,9 @@ const VideoGenerationPage = () => {
         if (loading) {
             const handleVideoGeneration = async () => {
                 try {
-                    const generateVideoResponse = await postGenerateVideo({ sex, description, audioFile, videoFile, id, prompt }) as GenerateVideoResponseType
+                    let tempPrompt: string = prompt
+                    setPrompt('')
+                    const generateVideoResponse = await postGenerateVideo({ sex, description, audioFile, videoFile, enhance, id, prompt: tempPrompt }) as GenerateVideoResponseType
                     const videoLink = generateVideoResponse.object_url.replace('minio', '127.0.0.1')
                     setVideo(videoLink)
                     setLoading(false)
@@ -48,7 +51,8 @@ const VideoGenerationPage = () => {
         }
 
         return () => clearInterval(interval)
-    }, [sex, description, audioFile, videoFile, id, prompt, loading])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loading])
 
     const handleGenerateVideo = () => {
         setLoading(true)
@@ -58,9 +62,9 @@ const VideoGenerationPage = () => {
         <div className='w-full flex justify-center h-screen'>
             <div className='pt-[50rem] flex flex-col gap-[32rem]'>
                 <div className='w-full flex flex-col gap-[8rem]'>
-                    <p className='font-oddval text-[32rem] text-center'>Интерактивная страница</p>
+                    <Header />
 
-                    <VideoPlayer loading={loading} video={video} message={message} />
+                    <VideoPlayer enhance={enhance} setEnhance={setEnhance} loading={loading} video={video} message={message} />
                 </div>
 
                 <div className='w-full flex flex-col gap-[2rem]'>
@@ -77,7 +81,7 @@ const VideoGenerationPage = () => {
                         />
 
                         <Button
-                            disabled={loading}
+                            disabled={loading || !prompt}
                             prevent={true}
                             clickHandler={handleGenerateVideo}
                             text='Отправить'
