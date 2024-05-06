@@ -4,10 +4,9 @@ import { useCreateNewProfileStore } from "../../../store/store"
 
 type ContinueButtonProps = {
     index: number,
-    handleNext: () => void
 }
 
-const ContinueButton: React.FC<ContinueButtonProps> = ({ index, handleNext }) => {
+const ContinueButton: React.FC<ContinueButtonProps> = ({ index }) => {
     const [stepData, setStepData] = useState<Array<'male' | 'female' | string | File | null>>([])
     const { sex, description, audioFile, videoFile, id } = useCreateNewProfileStore()
 
@@ -24,7 +23,7 @@ const ContinueButton: React.FC<ContinueButtonProps> = ({ index, handleNext }) =>
     return (
         <Button background='bg-[--primary]'
             disabled={!stepData[index]}
-            clickHandler={handleNext}
+            type='submit'
             text='Продолжить'
         />
     )

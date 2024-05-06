@@ -16,7 +16,7 @@ type StepBodyProps = {
 const StepBody: React.FC<StepBodyProps> = ({ step, index, activeStep, steps, handleNext, handleBack }) => {
     return (
         <div className={`${activeStep >= index + 1 ? 'border-l-[--primary]' : 'border-l-[gray]'} ml-[20rem] border-l-[1rem] pl-[100rem] h-fit`}>
-            <div className={`
+            <form onSubmit={(e) => { e.preventDefault(); handleNext() }} className={`
                 ${activeStep === index ? `max-h-[1000rem] pb-[16rem] delay-160` : 'max-h-[0rem] pb-[0rem] animate-out fade-out animate-in fade-in'} 
                 flex flex-col overflow-hidden gap-[16rem] transition-all duration-300
             `}>
@@ -30,7 +30,7 @@ const StepBody: React.FC<StepBodyProps> = ({ step, index, activeStep, steps, han
                             ?
                             <ProceedToGenerationButton />
                             :
-                            <ContinueButton handleNext={handleNext} index={index}/>
+                            <ContinueButton index={index} />
                         }
                     </div>
 
@@ -43,7 +43,7 @@ const StepBody: React.FC<StepBodyProps> = ({ step, index, activeStep, steps, han
                         </div>
                     }
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

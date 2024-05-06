@@ -8,7 +8,7 @@ const SexSelector = () => {
     }
 
     return (
-        <form className='flex gap-[16rem]'>
+        <div className='flex gap-[16rem]'>
             {['Мужчина', 'Женщина'].map((sexItem) => (
                 <div key={sexItem} className='flex flex-col items-center gap-[8rem]'>
                     <input
@@ -26,7 +26,7 @@ const SexSelector = () => {
                     <label>{sexItem}</label>
                 </div>
             ))}
-        </form>
+        </div>
     )
 }
 
