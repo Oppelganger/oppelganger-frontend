@@ -96,20 +96,20 @@ body {
 
 .gradient {
   background: linear-gradient(to bottom right, #D0D0D0 7%, #E0E0E0 55%, #D0D0D0 100%);
-  background-size: 200% 100%; /* Задаем размер фона, больший чем контейнер */
-  animation: gradient-animation 2000ms linear infinite; /* 5s - длительность анимации, можно изменить */
+  background-size: 200% 100%;
+  animation: gradient-animation 2000ms linear infinite;
 }
 
 @keyframes gradient-animation {
   0% {
-    background-position: 0 50%; /* Начальная позиция - крайнее левое положение */
+    background-position: 0 50%;
   }
+
   50% {
-    background-position: 100% 50%; /* Конечная позиция - крайнее правое положение */
+    background-position: 100% 50%;
   }
+
   100% {
-    background-position: 0 50%; /* Возвращаемся в начальную позицию */
+    background-position: 0 50%;
   }
 }
-
-/* TODO NEXT STEP ON ENTER */

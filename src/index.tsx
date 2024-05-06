@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import WelcomePage from './pages/WelcomePage/index'
 import CreateNewProfilePage from './pages/CreateNewProfilePage/index'
 
-const VideoGenerationPage = lazy(() => import("./pages/VideoGenerationPage/index"));
+const VideoGenerationPage = lazy(() => import("./pages/VideoGenerationPage/index"))
 
 const router = createBrowserRouter([
   {
